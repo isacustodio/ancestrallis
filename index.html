@@ -13,15 +13,25 @@
             color: #f5f5dc;
         }
         .card {
-            background-color: #2e3d30;
+            background-color: #4d6650;
             border: none;
+            height: 100%;
+        }
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .btn-primary {
-            background-color: #c19a6b;
+            background-color: #e69fb4;
             border: none;
         }
         .btn-primary:hover {
-            background-color: #a67b5b;
+            background-color: #800404;
         }
         .cart-container {
             background: #f5f5dc;
@@ -33,15 +43,42 @@
             border-radius: 10px;
             margin-bottom: 20px;
         }
+        .swiper-container {
+            width: 100%;
+            overflow: hidden;
+            background: #2e3d30;
+            padding: 10px 0;
+        }
+        .swiper-slide {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        .swiper-slide img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .swiper-slide h4 {
+            margin: 0;
+            color: #f5f5dc;
+        }
     </style>
 </head>
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Catálogo Ancestrallis</h1>
-        <div class="payment-info text-center">
-            <h4>Formas de Pagamento</h4>
-            <p><i class="fas fa-qrcode"></i> Pagamento via Pix</p>
-            <p><i class="fas fa-credit-card"></i> Pagamento via Cartão (acima de R$250)</p>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <i class="bi bi-percent"></i>
+                    <a href="#"><h4>Pague no PIX e ganhe 3% OFF</h4></a>
+                </div>
+                <div class="swiper-slide">
+                    <i class="bi bi-credit-card"></i>
+                    <a href="#"><h4>Cartão de CRÉDITO acima de R$250</h4></a>
+                </div>
+            </div>
         </div>
         <div class="text-end">
             <a href="carrinho.html" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Ver Carrinho</a>
@@ -63,7 +100,7 @@
             { name: "Roll-on Xô Coceirinha", description: "Óleo de calêndula, copaíba, lavanda, melaleuca e olíbano", price: 23, img: "rollon.jpg" },
             { name: "Antisséptico Natural", description: "Própolis, barbatimão, lavanda e óleo essencial de melaleuca", price: 39, img: "antisseptico.jpg" },
             { name: "Elixir Hidratante", description: "Óleo de argan, amêndoas, lavanda e essência botânica", price: 33, img: "elixir.jpg" },
-            { name: "Escalda-pés", description: "Ureia, sal, semente de uva, mentol, lavanda, alecrim e camomila", price: 19, img: "escalda_pes.jpg" }
+            //{ name: "Escalda-pés", description: "Ureia, sal, semente de uva, mentol, lavanda, alecrim e camomila", price: 19, img: "escalda_pes.jpg" }
         ];
 
         const cart = [];
@@ -80,7 +117,7 @@
                                 <h5 class="card-title">${product.name}</h5>
                                 <p class="card-text">${product.description}</p>
                                 <p class="card-text"><strong>R$ ${product.price.toFixed(2)}</strong></p>
-                                <button class="btn btn-primary" onclick="addToCart(${index})">Adicionar ao Carrinho</button>
+                                <button class="btn btn-primary" onclick="addToCart(${index})">Adicionar</button>
                             </div>
                         </div>
                     </div>`;
