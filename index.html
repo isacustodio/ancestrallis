@@ -89,7 +89,7 @@
         .swiper-container {
             width: 100%;
             overflow: hidden;
-            background: #2e3d30;
+            background: #680c00;
             padding: 10px 0;
             position: relative;
             display: flex;
@@ -283,6 +283,11 @@
         }
 
         displayProducts();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCartCount();
+            displayProducts();
+        });
     </script>
 </body>
 </html>

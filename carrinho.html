@@ -6,9 +6,7 @@
     <title>Carrinho - Ancestrallis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         body {
             background-color: #1b2b20;
@@ -20,31 +18,53 @@
             border-radius: 10px;
         }
         .btn-primary {
-            background-color: #c19a6b;
+            background-color: #00944a;
             border: none;
         }
         .btn-primary:hover {
             background-color: #a67b5b;
         }
-        .swiper-container {
-            width: 100%;
-            overflow: hidden;
-            background: #2e3d30;
-            padding: 10px 0;
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background: #4d6650;
+            border-radius: 8px;
+            margin-bottom: 10px;
         }
-        .swiper-slide {
+        .cart-item div {
+            display: flex;
+            align-items: center;
+        }
+        .cart-item h5 {
+            margin: 0;
+            font-size: 1rem;
+            margin-right: 10px;
+        }
+        .cart-item p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+        }
+        .cart-buttons {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .cart-buttons button {
+            width: 30px;
+            height: 30px;
+            padding: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
         }
-        .swiper-slide img {
-            height: 40px;
-            margin-right: 10px;
-        }
-        .swiper-slide h4 {
-            margin: 0;
-            color: #f5f5dc;
+        .quantity {
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0 10px;
+            min-width: 20px;
+            text-align: center;
         }
     </style>
 </head>
@@ -74,12 +94,20 @@
             cart.forEach((item, index) => {
                 total += item.price * item.quantity;
                 cartList.innerHTML += `
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        ${item.name} - R$ ${item.price.toFixed(2)} x ${item.quantity}
+                    <li class="cart-item">
                         <div>
+                            <button class="btn btn-sm btn-danger" onclick="removeFromCart(${index})">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                            <div class="ms-2">
+                                <h5>${item.name}</h5>
+                                <p>R$ ${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <div class="cart-buttons">
                             <button class="btn btn-sm btn-success" onclick="increaseQuantity(${index})">+</button>
+                            <span class="quantity">${item.quantity}</span>
                             <button class="btn btn-sm btn-warning" onclick="decreaseQuantity(${index})">-</button>
-                            <button class="btn btn-sm btn-danger" onclick="removeFromCart(${index})">X</button>
                         </div>
                     </li>`;
             });
