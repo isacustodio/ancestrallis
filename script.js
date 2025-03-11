@@ -44,7 +44,7 @@ const products = [
     },
     {
         "name": "Xô Coceirinha",
-        "tamanho": "10ml",
+        "tamanho": "7ml",
         "description": "Óleo de calêndula, copaíba, lavanda, melaleuca e olíbano",
         "price": 23,
         "img": "xococeirinha.jpg"
