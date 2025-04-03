@@ -97,7 +97,42 @@ const products = [
         "description": "Óleo de argan, amêndoas, lavanda e essência botânica",
         "price": 33,
         "img": "elixir.jpg"
-    }
+    },
+    {
+        "name": "Sabão de Barbear",
+        "description": "Base de sabonete Ancestrallis, extrato glicerinado de barbatimão, argila verde, mentol e essência botânica",
+        "tamanho": "30g",
+        "price": 3,
+        "img": "barbear.jpeg"
+    },
+    {
+        "name": "Pós Barba",
+        "description": "Extratos glicerinados de calêndula, barbatimão e limão, álcool de cereais, glicerina bidestilada e essência botânica",
+        "tamanho": "30ml",
+        "price": 18,
+        "img": "posbarba.jpeg"
+    },
+    {
+        "name": "Kit de Barbear",
+        "description": "Sabão de babear botânico e Pós Barba natural. Sua pele agradece pela hidratação e cuidado, preparar a pele antes da lâmina faz toda diferença",
+        "tamanho": "kit",
+        "price": 20,
+        "img": "kitbarba.jpeg"
+    },
+    {
+        "name": "Desodorante Botânico",
+        "description": "Água destilada, leite de magnesia, álcool de cereais, argila branca, óleos essencias de melaleuca, hortelã-pimenta e palmarosa ou palmarosa, lavanda e capim limão",
+        "tamanho": "120ml",
+        "price": 21,
+        "img": "desodorante.jpeg"
+    },
+    {
+        "name": "Super Hidratante Corpotal",
+        "description": "Água destilada, óleos de Rosa Mosqueta e argan, manteiga de karité, glicerina bidestilada, extrato glicerinado de lavanda e essência botânica",
+        "tamanho": "150g",
+        "price": 75,
+        "img": "hidratante.jpeg"
+    },
 ];
 
 // ---------------------- Funções Compartilhadas ----------------------
