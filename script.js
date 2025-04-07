@@ -52,7 +52,7 @@ const products = [
     {
         "name": "Tônico Facial",
         "tamanho": "30ml",
-        "description": "Água destilada, alcool de cereais, extratos gliceriandos de lavanda, barbatimão e morango, glicerina bidestilada, óleos essenciais de gerânio, lavanda e olíbano",
+        "description": "Água destilada, alcool de cereais, extratos glicerinados de lavanda, barbatimão e morango, glicerina bidestilada, óleos essenciais de gerânio, lavanda e olíbano",
         "price": 37,
         "img": "tonico.jpg"
     },
@@ -66,7 +66,7 @@ const products = [
     {
         "name": "Esfoliante Corporal",
         "tamanho": "60g",
-        "description": "Sabonete Ancestrallis, óleos vegerais de amêndoa, rosa mosqueta e mamona, glicerina bidestilada, extratos glicerinados de calêndula e amora, açúcar orgânico, sal, água destilada, manteiga de karité e essencia botânica",
+        "description": "Sabonete Ancestrallis, óleos vegetais de amêndoa, rosa mosqueta e mamona, glicerina bidestilada, extratos glicerinados de calêndula e amora, açúcar orgânico, sal, água destilada, manteiga de karité e essencia botânica",
         "price": 58,
         "img": "esfoliante.jpg"
     },
@@ -80,7 +80,7 @@ const products = [
     {
         "name": "Body Splash",
         "tamanho": "120ml",
-        "description": "Disponível em Jasmim, Sândalo e Primavera, Bergamota, Cedro, Cereja e Avelã",
+        "description": "Disponível em jasmim, sândalo e primavera, bergamota, cedro, cereja e avelã",
         "price": 48,
         "img": "bodysplash.jpg"
     },
@@ -114,7 +114,7 @@ const products = [
     },
     {
         "name": "Kit de Barbear",
-        "description": "Sabão de babear botânico e Pós Barba natural. Sua pele agradece pela hidratação e cuidado, preparar a pele antes da lâmina faz toda diferença",
+        "description": "Sabão de barbear botânico e pós Barba natural. Sua pele agradece pela hidratação e cuidado, preparar a pele antes da lâmina faz toda diferença.",
         "tamanho": "kit",
         "price": 20,
         "img": "kitbarba.jpeg"
@@ -128,7 +128,7 @@ const products = [
     },
     {
         "name": "Super Hidratante Corpotal",
-        "description": "Água destilada, óleos de Rosa Mosqueta e argan, manteiga de karité, glicerina bidestilada, extrato glicerinado de lavanda e essência botânica",
+        "description": "Água destilada, óleos de rosa mosqueta e argan, manteiga de karité, glicerina bidestilada, extrato glicerinado de lavanda e essência botânica",
         "tamanho": "150g",
         "price": 75,
         "img": "hidratante.jpeg"
