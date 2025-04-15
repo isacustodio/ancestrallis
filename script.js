@@ -71,6 +71,13 @@ const products = [
         "img": "esfoliante.jpg"
     },
     {
+        "name": "Difusor de Varetas",
+        "tamanho": "250ml",
+        "description": "Álcool de cereais, essência botânica e água destilada. *Essência personalizada",
+        "price": 118,
+        "img": "difusor.jpg"
+    },
+    {
         "name": "Home Spray",
         "tamanho": "150ml",
         "description": "Laranja doce, alecrim e cedro",
