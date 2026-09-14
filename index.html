@@ -1,8 +1,78 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#31392C"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta http-equiv="Expires" content="0"><title>Ancestrallis | Cosmética Botânica Artesanal</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="./styles.css?v=20260914-2"></head>
-<body><header class="hero"><nav><a class="brand" href="#top"><span class="mark">A<span>❧</span></span><strong>ANCESTRALLIS</strong></a><a class="bag" href="carrinho.html">Sacola <b id="cart-count">0</b></a></nav><div class="hero-copy" id="top"><p class="eyebrow">COSMÉTICA BOTÂNICA ARTESANAL</p><h1>Rituais que a<br><em>natureza ensinou.</em></h1><p class="intro">Feitos em pequenos lotes, com cuidado artesanal e ingredientes escolhidos para transformar o autocuidado em um ritual.</p><a class="cta" href="#catalogo">Conheça os rituais</a></div><div class="botanical">❧</div></header>
-<section class="manifesto"><p>PRODUTOS DE VERDADE · FEITOS À MÃO · EM PEQUENOS LOTES</p><h2>Da natureza para a sua pele,<br>com intenção em cada detalhe.</h2></section>
-<main id="catalogo"><div class="section-head"><p class="eyebrow">NOSSA COLEÇÃO</p><h2>Escolha seu ritual</h2><p>Cuidados botânicos para corpo, bem-estar e momentos cotidianos.</p></div><div id="product-list" class="grid"></div></main>
-<section class="about"><div><p class="eyebrow">ANCESTRALLIS</p><h2>Artesanal por essência.</h2></div><p>Cosméticos botânicos produzidos com carinho, individualidade e respeito aos ciclos. Menos excessos, mais presença: fórmulas que aproximam o cuidado daquilo que é simples, sensorial e natural.</p></section>
-<footer><div class="footer-brand"><span class="mark small">A<span>❧</span></span><strong>ANCESTRALLIS</strong><small>COSMÉTICA BOTÂNICA ARTESANAL</small></div><p><em>Rituais que a natureza ensinou.</em></p><p class="fine">Produto artesanal. Imagens ilustrativas. Consulte disponibilidade.</p></footer>
-<div class="modal" id="productModal"><div class="modal-card"><button class="close" onclick="closeModal()">×</button><img id="modalImage" alt=""><div><p class="eyebrow" id="modalSize"></p><h2 id="modalTitle"></h2><p id="modalDescription"></p><p class="modal-price" id="modalPrice"></p><button id="modalAdd" class="cta">Adicionar à sacola</button></div></div></div><script src="./script.js?v=20260914-2"></script></body></html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#31392C">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Ancestrallis | Cosmética Botânica Artesanal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=20260914-3">
+</head>
+<body>
+  <header class="hero">
+    <nav>
+      <a class="brand" href="#top"><strong>ANCESTRALLIS</strong></a>
+      <a class="bag" href="carrinho.html">Sacola <b id="cart-count">0</b></a>
+    </nav>
+    <div class="hero-copy" id="top">
+      <p class="eyebrow">COSMÉTICA BOTÂNICA ARTESANAL</p>
+      <h1>Rituais que a<br><em>natureza ensinou.</em></h1>
+      <p class="intro">Feitos em pequenos lotes, com cuidado artesanal e ingredientes escolhidos para transformar o autocuidado em um ritual.</p>
+      <a class="cta" href="#catalogo">Conheça os rituais</a>
+    </div>
+    <div class="botanical">❧</div>
+  </header>
+
+  <section class="manifesto">
+    <p>PRODUTOS DE VERDADE · FEITOS À MÃO · EM PEQUENOS LOTES</p>
+    <h2>Da natureza para a sua pele,<br>com intenção em cada detalhe.</h2>
+  </section>
+
+  <main id="catalogo">
+    <div class="section-head">
+      <p class="eyebrow">NOSSA COLEÇÃO</p>
+      <h2>Escolha seu ritual</h2>
+      <p>Cuidados botânicos para corpo, bem-estar e momentos cotidianos.</p>
+    </div>
+    <div id="product-list" class="grid"></div>
+  </main>
+
+  <section class="about">
+    <div>
+      <p class="eyebrow">ANCESTRALLIS</p>
+      <h2>Artesanal por essência.</h2>
+    </div>
+    <p>Cosméticos botânicos produzidos com carinho, individualidade e respeito aos ciclos. Menos excessos, mais presença: fórmulas que aproximam o cuidado daquilo que é simples, sensorial e natural.</p>
+  </section>
+
+  <footer>
+    <div class="footer-brand">
+      <strong>ANCESTRALLIS</strong>
+      <small>COSMÉTICA BOTÂNICA ARTESANAL</small>
+    </div>
+    <p><em>Rituais que a natureza ensinou.</em></p>
+    <p class="fine">Produto artesanal. Imagens ilustrativas. Consulte disponibilidade.</p>
+  </footer>
+
+  <div class="modal" id="productModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close" type="button" onclick="closeModal()" aria-label="Fechar produto">Fechar ✕</button>
+      <img id="modalImage" alt="">
+      <div class="modal-content">
+        <p class="eyebrow" id="modalSize"></p>
+        <h2 id="modalTitle"></h2>
+        <p id="modalDescription"></p>
+        <p class="modal-price" id="modalPrice"></p>
+        <button id="modalAdd" class="cta" type="button">Adicionar à sacola</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js?v=20260914-3"></script>
+</body>
+</html>
