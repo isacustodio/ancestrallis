@@ -93,7 +93,38 @@ function saveCart(cart) {
 function updateCartCount() {
   const count = getCart().reduce((sum, item) => sum + item.quantity, 0);
   const el = document.getElementById('cart-count');
-  if (el) el.textContent = count;
+  if (el) {
+    el.textContent = count;
+    el.classList.remove('cart-pulse');
+    void el.offsetWidth;
+    el.classList.add('cart-pulse');
+  }
+}
+
+let toastTimer;
+function showAddedFeedback(product) {
+  let toast = document.getElementById('cart-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'cart-toast';
+    toast.className = 'cart-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    document.body.appendChild(toast);
+  }
+
+  toast.innerHTML = `
+    <div class="cart-toast-icon">✓</div>
+    <div class="cart-toast-copy">
+      <strong>Adicionado à sacola</strong>
+      <span>${product.name}</span>
+    </div>
+    <a href="carrinho.html">Ver sacola</a>
+  `;
+
+  clearTimeout(toastTimer);
+  toast.classList.add('show');
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
 }
 
 function addToCart(index) {
@@ -111,6 +142,7 @@ function addToCart(index) {
   });
   saveCart(cart);
   updateCartCount();
+  showAddedFeedback(product);
 }
 
 function displayProducts() {
