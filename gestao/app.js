@@ -26,9 +26,9 @@ async function bootstrap(){
       if(legacy){try{const recovered=await decodeLegacy(JSON.parse(legacy));if(validData(recovered)){db=recovered;persist()}}catch(err){console.warn("Arquivo anterior preservado; não foi possível migrá-lo automaticamente.",err)}}
     }
     if(!db){const preset=window.AncestrallisInitialData;if(!validData(preset))throw Error("Dados iniciais incompletos.");db=JSON.parse(JSON.stringify(preset));persist()}
-    db.version=3;
+    const previousVersion=db.version||1;db.version=3;
     for(const r of db.recipes){for(const i of r.ingredients||[])ensureInventory(i.name,i.unit)}
-    if(!db.batches.length)for(const p of db.products){if(p.stock===0&&db.version<2)p.stock=null}
+    if(!db.batches.length)for(const p of db.products){if(p.stock===0&&previousVersion<2)p.stock=null}
     persist();
     draw();
   }catch(error){
