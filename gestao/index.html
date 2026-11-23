@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#23372f">
+<meta name="description" content="Atelier Ancestrallis — gestão botânica de receitas, produção e estoque">
+<title>Atelier | Ancestrallis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css?v=2">
+</head>
+<body>
+<div class="unlock-screen" id="unlock-screen">
+  <div class="unlock-panel">
+    <span class="brand-symbol">❧</span>
+    <p class="eyebrow">ANCESTRALLIS · ACESSO RESERVADO</p>
+    <h1>Seu atelier,<br><em>em boas mãos.</em></h1>
+    <p class="muted">Receitas e registros protegidos por criptografia. Use a chave privativa do seu atelier para abrir.</p>
+    <form id="unlock-form">
+      <label for="passphrase">Chave de acesso</label>
+      <div class="password-row"><input type="password" id="passphrase" autocomplete="off" placeholder="Digite sua chave" required><button type="button" id="show-pass" aria-label="Mostrar chave">◉</button></div>
+      <button class="btn primary full" id="unlock-btn" type="submit">Entrar no atelier <span>↗</span></button>
+      <p class="form-error" id="unlock-error" role="alert"></p>
+    </form>
+    <span class="tiny">Seu acesso é pessoal. Nesta prévia, os dados ficam criptografados neste navegador.</span>
+  </div>
+  <div class="unlock-image"><div><span>UM ESPAÇO PARA CRIAR</span><p>Pequenos lotes.<br>Grandes rituais.</p></div></div>
+</div>
+<div class="shell hidden" id="shell">
+<aside class="sidebar">
+  <a class="brand" href="#" aria-label="Ancestrallis Atelier"><span class="brand-icon">❧</span><span>ANCESTRALLIS<small>ATELIER · GESTÃO BOTÂNICA</small></span></a>
+  <p class="side-label">SEU ESPAÇO</p>
+  <nav class="navigation" aria-label="Navegação principal">
+    <button class="nav-item active" data-page="home"><span>▦</span> Visão geral</button>
+    <button class="nav-item" data-page="recipes"><span>♧</span> Meu receituário</button>
+    <button class="nav-item" data-page="production"><span>◈</span> Produzir</button>
+    <button class="nav-item" data-page="inventory"><span>◫</span> Ingredientes</button>
+    <button class="nav-item" data-page="finished"><span>◉</span> Produtos prontos</button>
+    <button class="nav-item" data-page="shopping"><span>☷</span> Lista de compras <b id="nav-buys" class="nav-count"></b></button>
+    <button class="nav-item" data-page="pricing"><span>◇</span> Precificação</button>
+    <button class="nav-item" data-page="history"><span>↺</span> Histórico</button>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="sidebar-note"><span>✦</span><p>Feito à mão,<br>com intenção.</p><small>Rituais que a natureza ensinou.</small></div>
+    <button class="nav-item" data-page="settings"><span>⚙</span> Segurança e dados</button>
+    <button id="lock-btn" class="nav-item"><span>⇥</span> Bloquear</button>
+  </div>
+</aside>
+<div class="workspace">
+  <header class="topbar">
+    <div class="breadcrumb"><span>ANCESTRALLIS</span><span class="slash">/</span><span id="crumb">Visão geral</span></div>
+    <div class="top-actions"><span class="storage-dot"></span><span class="storage-status">Prévia protegida · neste navegador</span><span class="user-avatar">A</span></div>
+  </header>
+  <main id="view" tabindex="-1"></main>
+  <footer class="app-footer">ANCESTRALLIS <span>✦</span> COSMÉTICA BOTÂNICA ARTESANAL <span class="right">Rituais que a natureza ensinou.</span></footer>
+</div>
+<nav class="mobile-nav" aria-label="Atalhos">
+<button data-page="home">▦<small>Início</small></button><button data-page="recipes">♧<small>Receitas</small></button><button data-page="production">◈<small>Produzir</small></button><button data-page="inventory">◫<small>Estoque</small></button><button data-page="shopping">☷<small>Compras</small></button>
+</nav>
+</div>
+<div id="modal-root" class="modal-root hidden" aria-hidden="true"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script defer src="./app.js?v=2"></script>
+</body>
+</html>
