@@ -12,35 +12,67 @@ const num=v=>Math.max(0,Number(String(v??"0").replace(",","."))||0);
 const uid=()=>Date.now().toString(36)+"-"+Math.random().toString(36).slice(2,7);
 const date=()=>new Date().toLocaleDateString("pt-BR");
 const labels={home:"Visão geral",recipes:"Meu receituário","recipe-detail":"Meu receituário",production:"Produzir",inventory:"Ingredientes",finished:"Produtos prontos",shopping:"Lista de compras",pricing:"Precificação",history:"Histórico",settings:"Dados e backups"};
-let db=null,saveQueue=Promise.resolve();
+let db=null,saveQueue=Promise.resolve(),booting=null,memoryOnly=false;
 let page="home",recipeId="pele",plan={recipeId:"pele",count:3,size:150},search="",filter="Todas",pricingId=null,noticeTimer=null;
 function b64ToBytes(s){const b=atob(s),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a}
 async function decodeLegacy(env){if(!globalThis.crypto?.subtle)throw Error("Criptografia de backup indisponível.");const origin=await crypto.subtle.importKey("raw",new TextEncoder().encode(LEGACY_KEY),"PBKDF2",false,["deriveKey"]);const key=await crypto.subtle.deriveKey({name:"PBKDF2",salt:b64ToBytes(env.salt),iterations:220000,hash:"SHA-256"},origin,{name:"AES-GCM",length:256},false,["decrypt"]);const raw=await crypto.subtle.decrypt({name:"AES-GCM",iv:b64ToBytes(env.iv)},key,b64ToBytes(env.data));let bytes=new Uint8Array(raw);if(env.compressed){const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream("gzip"));bytes=new Uint8Array(await new Response(stream).arrayBuffer())}return JSON.parse(new TextDecoder().decode(bytes))}
 function validData(value){return !!(value&&Array.isArray(value.recipes)&&Array.isArray(value.ingredients)&&Array.isArray(value.products)&&Array.isArray(value.batches)&&Array.isArray(value.movements)&&Array.isArray(value.manualShopping))}
 async function bootstrap(){
-  try{
-    const existing=localStorage.getItem(STORAGE);
-    if(existing){const parsed=JSON.parse(existing);if(validData(parsed))db=parsed}
-    if(!db){
-      const legacy=localStorage.getItem(LEGACY_STORAGE);
-      if(legacy){try{const recovered=await decodeLegacy(JSON.parse(legacy));if(validData(recovered)){db=recovered;persist()}}catch(err){console.warn("Arquivo anterior preservado; não foi possível migrá-lo automaticamente.",err)}}
-    }
-    if(!db){const preset=window.AncestrallisInitialData;if(!validData(preset))throw Error("Dados iniciais incompletos.");db=JSON.parse(JSON.stringify(preset));persist()}
-    const previousVersion=db.version||1;db.version=3;
-    for(const r of db.recipes){for(const i of r.ingredients||[])ensureInventory(i.name,i.unit)}
-    if(!db.batches.length)for(const p of db.products){if(p.stock===0&&previousVersion<2)p.stock=null}
-    persist();
-    draw();
-  }catch(error){
-    console.error(error);
-    const view=$("#view");
-    if(view)view.innerHTML='<div class="card"><h2>Não foi possível abrir o Atelier</h2><p>Os dados salvos neste navegador estão indisponíveis. Faça uma cópia de segurança antes de limpar o navegador.</p><button class="btn primary" onclick="location.reload()">Tentar novamente</button></div>';
-  }
+  if(db){draw();return true}
+  if(booting)return booting;
+  booting=(async()=>{
+    try{
+      let existing=null;
+      try{existing=localStorage.getItem(STORAGE)}catch(error){memoryOnly=true;console.warn("Armazenamento local indisponível",error)}
+      if(existing){
+        try{
+          const parsed=JSON.parse(existing);
+          if(validData(parsed))db=parsed;
+        }catch(error){console.warn("Dados salvos não puderam ser lidos. Preservando original.",error)}
+      }
+      if(!db){
+        let legacy=null;
+        try{legacy=localStorage.getItem(LEGACY_STORAGE)}catch(error){memoryOnly=true}
+        if(legacy){
+          try{
+            const recovered=await decodeLegacy(JSON.parse(legacy));
+            if(validData(recovered))db=recovered;
+          }catch(error){console.warn("Versão anterior preservada para recuperação",error)}
+        }
+      }
+      if(!db){
+        const preset=window.AncestrallisInitialData;
+        if(!validData(preset))throw Error("Arquivo inicial de receitas não carregou.");
+        db=JSON.parse(JSON.stringify(preset));
+        if(existing)try{localStorage.setItem(STORAGE+"-recuperacao-"+Date.now(),existing)}catch(error){memoryOnly=true}
+      }
+      const previousVersion=db.version||1;
+      db.version=3;
+      for(const r of db.recipes)for(const i of r.ingredients||[])ensureInventory(i.name,i.unit);
+      if(!db.batches.length&&previousVersion<2)for(const p of db.products)if(p.stock===0)p.stock=null;
+      persist();
+      draw();
+      if(memoryOnly)toast("Modo temporário: este navegador não permite salvar. Use backups.");
+      return true;
+    }catch(error){
+      console.error("Não foi possível abrir Atelier",error);
+      const view=$("#view");
+      if(view)view.innerHTML='<section class="card" role="alert"><h2>Não foi possível iniciar o Atelier</h2><p>Falha ao carregar os dados. Suas informações anteriores não foram apagadas.</p><p class="muted">'+safe(error.message||error)+'</p><button class="btn primary" onclick="location.reload()">Tentar novamente</button></section>';
+      return false;
+    }finally{booting=null}
+  })();
+  return booting;
 }
 function persist(){
-  if(!db)return Promise.resolve();
-  try{localStorage.setItem(STORAGE,JSON.stringify(db));return Promise.resolve()}
-  catch(error){console.error(error);toast("Não foi possível salvar. Verifique o espaço de armazenamento.");return Promise.reject(error)}
+  if(!db)return Promise.resolve(false);
+  try{
+    localStorage.setItem(STORAGE,JSON.stringify(db));
+    return Promise.resolve(true);
+  }catch(error){
+    memoryOnly=true;
+    console.warn("Não foi possível salvar neste navegador",error);
+    return Promise.resolve(false);
+  }
 }
 function toast(msg){const el=$("#toast");el.textContent=msg;el.classList.add("show");clearTimeout(noticeTimer);noticeTimer=setTimeout(()=>el.classList.remove("show"),4000)}
 function ingredientKey(name,unit){return name.trim().toLocaleLowerCase("pt-BR")+"|"+unit}
