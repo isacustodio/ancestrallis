@@ -10,12 +10,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./style.css?v=2">
+<link rel="stylesheet" href="./style.css?v=4">
 </head>
 <body>
 <div class="shell" id="shell">
 <aside class="sidebar">
-  <a class="brand" href="#" aria-label="Ancestrallis Atelier"><span class="brand-icon">❧</span><span>ANCESTRALLIS<small>ATELIER · GESTÃO BOTÂNICA</small></span></a>
+  <a class="brand" href="#inicio" data-page="home" aria-label="Ancestrallis Atelier"><span class="brand-icon">❧</span><span>ANCESTRALLIS<small>ATELIER · GESTÃO BOTÂNICA</small></span></a>
   <p class="side-label">SEU ESPAÇO</p>
   <nav class="navigation" aria-label="Navegação principal">
     <button class="nav-item active" data-page="home"><span>▦</span> Visão geral</button>
@@ -38,7 +38,7 @@
     <div class="breadcrumb"><span>ANCESTRALLIS</span><span class="slash">/</span><span id="crumb">Visão geral</span></div>
     <div class="top-actions"><span class="storage-dot"></span><span class="storage-status">Acesso direto · dados neste navegador</span><span class="user-avatar">A</span></div>
   </header>
-  <main id="view" tabindex="-1"><div class="empty">Preparando seu atelier botânico…</div></main>
+  <main id="view" tabindex="-1"><div class="empty" aria-live="polite">Carregando suas receitas e seu painel de produção…</div></main>
   <footer class="app-footer">ANCESTRALLIS <span>✦</span> COSMÉTICA BOTÂNICA ARTESANAL <span class="right">Rituais que a natureza ensinou.</span></footer>
 </div>
 <nav class="mobile-nav" aria-label="Atalhos">
@@ -47,7 +47,18 @@
 </div>
 <div id="modal-root" class="modal-root hidden" aria-hidden="true"></div>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script defer src="./data.js?v=3"></script>
-<script defer src="./app.js?v=3"></script>
+<noscript><p class="note red" style="margin:20px">O navegador está bloqueando JavaScript. Para utilizar os botões, ative JavaScript nas configurações do navegador.</p></noscript>
+<script defer src="./data.js?v=4"></script>
+<script defer src="./app.js?v=4"></script>
+<script>
+window.addEventListener("load",function(){
+  window.setTimeout(function(){
+    var view=document.getElementById("view");
+    if(view&&view.textContent.includes("Carregando suas receitas")){
+      view.innerHTML='<section class="card" role="alert"><h2>O painel não terminou de carregar</h2><p>O navegador não conseguiu iniciar o Atelier. Atualize a página; se continuar, tente abrir diretamente no Chrome ou Safari.</p><button class="btn primary" onclick="location.reload()">Atualizar página</button></section>';
+    }
+  },7000);
+});
+</script>
 </body>
 </html>
